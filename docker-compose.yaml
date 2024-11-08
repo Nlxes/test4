@@ -1,0 +1,38 @@
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./access.log:/var/log/nginx/access.log 
+    networks:
+      - test4-network
+  
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - test4-network
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    ports:
+      - "3100:3100"
+    networks:
+      - test4-network
+
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    volumes:
+      - ./access.log:/var/log/access.log
+    networks:
+      - test4-network
+
+networks:
+  test4-network:
+    driver: bridge
