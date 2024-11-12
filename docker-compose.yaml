@@ -6,8 +6,6 @@ services:
       - "80:80"
     volumes:
       - ./access.log:/var/log/nginx/access.log 
-    networks:
-      - test4-network
   
   grafana:
     image: grafana/grafana
